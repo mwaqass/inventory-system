@@ -28,9 +28,9 @@
         <form method="POST" action="{{ route('register') }}"
               @submit="isLoading = true"
               class="space-y-6">
-            @csrf
+        @csrf
 
-            <!-- Name -->
+        <!-- Name -->
             <div class="space-y-2">
                 <x-input-label for="name" :value="__('Full Name')" class="text-sm font-medium text-gray-700" />
                 <div class="relative">
@@ -51,9 +51,9 @@
                         placeholder="Enter your full name" />
                 </div>
                 <x-input-error :messages="$errors->get('name')" class="mt-1" />
-            </div>
+        </div>
 
-            <!-- Email Address -->
+        <!-- Email Address -->
             <div class="space-y-2">
                 <x-input-label for="email" :value="__('Email Address')" class="text-sm font-medium text-gray-700" />
                 <div class="relative">
@@ -73,9 +73,9 @@
                         placeholder="Enter your email address" />
                 </div>
                 <x-input-error :messages="$errors->get('email')" class="mt-1" />
-            </div>
+        </div>
 
-            <!-- Password -->
+        <!-- Password -->
             <div class="space-y-2">
                 <x-input-label for="password" :value="__('Password')" class="text-sm font-medium text-gray-700" />
                 <div class="relative">
@@ -89,7 +89,7 @@
                         @input="checkPasswordStrength($event.target.value)"
                         class="block w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white"
                         :type="showPassword ? 'text' : 'password'"
-                        name="password"
+                            name="password"
                         required
                         autocomplete="new-password"
                         placeholder="Create a strong password" />
@@ -140,9 +140,9 @@
                 </div>
 
                 <x-input-error :messages="$errors->get('password')" class="mt-1" />
-            </div>
+        </div>
 
-            <!-- Confirm Password -->
+        <!-- Confirm Password -->
             <div class="space-y-2">
                 <x-input-label for="password_confirmation" :value="__('Confirm Password')" class="text-sm font-medium text-gray-700" />
                 <div class="relative">
@@ -212,7 +212,7 @@
                 <div class="relative flex justify-center text-sm">
                     <span class="px-2 bg-white text-gray-500">Already have an account?</span>
                 </div>
-            </div>
+        </div>
 
             <!-- Sign In Link -->
             <div class="text-center">
@@ -223,7 +223,7 @@
                     </svg>
                     Sign In
                 </a>
-            </div>
-        </form>
+        </div>
+    </form>
     </div>
 </x-guest-layout>
