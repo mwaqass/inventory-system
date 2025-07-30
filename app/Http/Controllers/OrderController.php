@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
@@ -67,6 +69,15 @@ class OrderController extends Controller
             'status' => 'required|in:pending,processing,shipped,delivered,cancelled',
         ]);
 
+        // Find or create customer user
+        $customer = User::firstOrCreate(
+            ['email' => $request->customer_email],
+            [
+                'name' => $request->customer_name,
+                'password' => bcrypt(Str::random(10)), // Generate random password
+            ]
+        );
+
         $order = Order::create([
             'order_number' => 'ORD-' . strtoupper(uniqid()),
             'customer_name' => $request->customer_name,
@@ -76,6 +87,7 @@ class OrderController extends Controller
             'billing_address' => $request->billing_address ?? $request->shipping_address,
             'status' => $request->status,
             'total_amount' => 0, // Will be calculated
+            'user_id' => $customer->id, // Add the user_id
         ]);
 
         $total = 0;
@@ -83,8 +95,8 @@ class OrderController extends Controller
             $order->items()->create([
                 'product_id' => $item['product_id'],
                 'quantity' => $item['quantity'],
-                'price' => $item['price'],
-                'total' => $item['quantity'] * $item['price'],
+                'unit_price' => $item['price'],
+                'total_price' => $item['quantity'] * $item['price'],
             ]);
             $total += $item['quantity'] * $item['price'];
         }

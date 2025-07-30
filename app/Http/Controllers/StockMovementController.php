@@ -92,4 +92,11 @@ class StockMovementController extends Controller
         return redirect()->route('stock-movements.index')
             ->with('success', 'Stock movement created successfully.');
     }
+
+    public function show(StockMovement $stockMovement)
+    {
+        $stockMovement->load(['product', 'warehouse', 'user']);
+
+        return view('stock-movements.show', compact('stockMovement'));
+    }
 }

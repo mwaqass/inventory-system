@@ -48,9 +48,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/orders/{order}/process', [OrderController::class, 'process'])->name('orders.process');
 
     // Stock Movements
-    Route::get('/stock-movements', [App\Http\Controllers\StockMovementController::class, 'index'])->name('stock-movements.index');
-    Route::get('/stock-movements/create', [App\Http\Controllers\StockMovementController::class, 'create'])->name('stock-movements.create');
-    Route::post('/stock-movements', [App\Http\Controllers\StockMovementController::class, 'store'])->name('stock-movements.store');
+    Route::resource('stock-movements', App\Http\Controllers\StockMovementController::class);
 
     // Purchase Orders
     Route::resource('purchase-orders', App\Http\Controllers\PurchaseOrderController::class);
