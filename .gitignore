@@ -22,3 +22,6 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+
+#powershell -ExecutionPolicy Bypass -File "auto-commit.ps1" -CommitMessage "feat: add new feature"
